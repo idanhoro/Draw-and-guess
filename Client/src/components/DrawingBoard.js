@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import Axios from 'axios'
 
 const DrawingBoard = () => {
     const canvasRef = useRef(null)
@@ -68,7 +69,20 @@ const DrawingBoard = () => {
     const finishDrawingTouch = (nativeEvent) =>{
         contextRef.current.closePath();
     }
-    
+    // handlers
+    const handleClear = () =>{
+        contextRef.current.clearRect(0, 0, contextRef.current.canvas.width, contextRef.current.canvas.height);
+        setData([]);
+    }
+    const handleSendingData = () => {
+        Axios.post('http://localhost:3008/drawingBoard/sendData', data)
+        .then((res)=>{
+            console.log(res)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
     return (
         <div>
             <h1>DrawingBoard</h1>
@@ -83,7 +97,9 @@ const DrawingBoard = () => {
                 onTouchEnd = {finishDrawingTouch}
                 ref={canvasRef}
             />
-            <button onClick={() => { console.log(data) }}>View data</button>
+            <br/>
+            <button onClick={handleClear}>Clear</button>
+            <button onClick={handleSendingData}>Send</button>
 
         </div>
     )

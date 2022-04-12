@@ -1,6 +1,7 @@
 import Welcome from "./views/Welcome";
 import Drawing from "./views/Drawing";
 import Guessing from "./views/Guessing";
+import WordChoosing from "./views/WordChoosing";
 
 import {BrowserRouter} from "react-router-dom";
 import { Route, Routes} from "react-router";
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/" element={<Welcome/>}/>
           <Route path="/draw" element={<Drawing/>}/>
           <Route path="/guess" element={<Guessing/>}/>
+          <Route path="/wordChoosing" element={<WordChoosing/>}/>
         </Routes>
     </div>
     </BrowserRouter>
