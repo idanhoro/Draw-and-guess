@@ -75,7 +75,9 @@ const DrawingBoard = () => {
         setData([]);
     }
     const handleSendingData = () => {
-        Axios.post('http://localhost:3008/drawingBoard/sendData', data)
+        Axios.post('http://localhost:3008/drawingBoard/sendData',
+         data,
+         {headers:{"room-id":localStorage.getItem("RoomID")}})
         .then((res)=>{
             console.log(res)
         }).catch((error) => {

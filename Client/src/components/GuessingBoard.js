@@ -13,7 +13,8 @@ function GuessingBoard() {
             return
         }
         interval = setInterval(() => {
-            Axios.get('http://localhost:3008/drawingBoard/getData')
+            Axios.get('http://localhost:3008/drawingBoard/getData',
+            {headers:{"room-id":localStorage.getItem("RoomID")}})
             .then((req)=>{
                 console.log(req)
                 if (req.data.ready){
@@ -45,6 +46,7 @@ function GuessingBoard() {
     const draw = async () => {
         contextRef.current.clearRect(0, 0, contextRef.current.canvas.width, contextRef.current.canvas.height);
         let previous = {time:data[0].time};
+        setIsReady(false)
         data.forEach(async (element, i) => {
             setTimeout(() => {
                 if (element.start){
@@ -55,6 +57,9 @@ function GuessingBoard() {
                 else{
                     contextRef.current.lineTo(element.x, element.y);
                     contextRef.current.stroke();
+                }
+                if (i === data.length - 1){
+                    setIsReady(true)
                 }
                 previous = element
             },(element.time-previous.time))
