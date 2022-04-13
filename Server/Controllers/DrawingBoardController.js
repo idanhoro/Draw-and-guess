@@ -1,15 +1,13 @@
 //const drawing = {ready: false, data : []}
-const drawing = {}
+// const drawing = {}
 
 module.exports.getDrawingData = async (req, res) => {
     try {
-        console.log(req.headers["room-id"])
-        console.log(!(req.headers["room-id"] in drawing))
-        if(!(req.headers["room-id"] in drawing)){
+        if(!(req.headers["room-id"] in serverData.drawing)){
             return res.status(200).json({ready: false, data : []})
         }
         // console.log(drawing.req.headers["room-id"])
-        return res.status(200).json(drawing[req.headers["room-id"]])
+        return res.status(200).json(serverData.drawing[req.headers["room-id"]])
         
 
     } catch (error) {
@@ -19,7 +17,7 @@ module.exports.getDrawingData = async (req, res) => {
 }
 module.exports.sendDrawingData = async (req, res) =>{
     try {
-        drawing[req.headers["room-id"]] = {data:req.body, ready:true}
+        serverData.drawing[req.headers["room-id"]] = {data:req.body, ready:true}
         return res.status(200).send('Drawing sent successfully')
         
     } catch (error) {
@@ -31,8 +29,8 @@ module.exports.sendDrawingData = async (req, res) =>{
 
 module.exports.deleteDrawingData = async (req, res) => {
     try {
-        drawing[req.headers["room-id"]].data = []
-        drawing[req.headers["room-id"]].ready = false
+        serverData.drawing[req.headers["room-id"]].data = []
+        serverData.drawing[req.headers["room-id"]].ready = false
         return res.status(200).send('Drawing deleted successfully')
         
     } catch (error) {

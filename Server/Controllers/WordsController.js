@@ -26,3 +26,12 @@ module.exports.getRandomWords = async (req, res) => {
         return res.status(400).send("Error occurred during sending random words.")
     }
 }
+
+module.exports.receivingChosenWord = async (req,res) => {
+    try {
+        console.log(res)
+    } catch (error) {
+        console.log(error)
+        return res.status(400).send("Error occurred during receiving chosen word.")
+    }
+}

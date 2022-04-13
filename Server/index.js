@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 
+serverData ={drawing:{}, occupiedRooms : []}
+
 const DrawingBoard = require('./routes/DrawingBoard')
 const Words = require('./routes/Words')
 const Users = require('./routes/Users')

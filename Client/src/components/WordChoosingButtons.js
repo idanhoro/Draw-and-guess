@@ -14,12 +14,15 @@ function WordChoosingButtons(){
                 console.log(error)
             }) 
     },[])
+    const sendWord = (event) =>{
+        console.log(event.currentTarget.textContent)
+    }
     return (
         <div>
             <h1>WordChoosing</h1>
             {wordBank.map((item)=>{
                 return (<div><br/>
-                <button>{item}</button>
+                <button onClick={sendWord}>{item}</button>
                 </div>
                 )
             })}
