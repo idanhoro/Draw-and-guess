@@ -1,0 +1,74 @@
+*{
+    font-family: 'Courier New',
+    Courier,
+    monospace;
+    }
+    .welcome__container{
+        background-color: rgb(105, 105, 250);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+    }
+    .welcome__container h1 {
+        font-style: italic;
+        padding: 1rem;
+    }
+    .welcome__container h1::after{
+    content: ' 🎨';
+    }
+    .welcome__container h1::before{
+        content: '🎨 ';
+        }
+    
+    
+    .input__container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .input__container label{
+        font-size: 1.4rem;
+        font-weight: bolder;
+    }
+    
+    
+    .input__container input{
+        margin-top: 0.5rem;
+        border: 1px solid black;
+        outline: none;
+        padding: 0.1rem;
+        font-size: 1rem;
+    }
+    
+    /* .input__container input:focus{
+        border: none;
+        box-shadow: 4px 7px rgb(105, 105, 200);
+    } */
+    
+    
+    
+    
+    
+    
+    .welcome__container .create__room{
+    margin: 1rem;
+    }
+    .welcome__container .btn{
+      padding: 0.4rem;
+      border-radius: 27px;
+      font-size: 1rem;
+      margin-top: 20px;
+      font-weight: bold;
+      outline: none;
+    }
+    
+    .welcome__container .btn:hover{
+    cursor: pointer;
+    transition: ease-in-out .5s;
+    font-size: 1.2rem;
+    }

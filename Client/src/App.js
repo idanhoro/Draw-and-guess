@@ -2,7 +2,9 @@ import Welcome from "./views/Welcome";
 import Drawing from "./views/Drawing";
 import Guessing from "./views/Guessing";
 import WordChoosing from "./views/WordChoosing";
+import Waiting from "./views/Waiting";
 
+import './App.css'
 import {BrowserRouter} from "react-router-dom";
 import { Route, Routes} from "react-router";
 import { ToastContainer} from 'react-toastify';
@@ -18,6 +20,7 @@ function App() {
           <Route path="/draw" element={<Drawing/>}/>
           <Route path="/guess" element={<Guessing/>}/>
           <Route path="/wordChoosing" element={<WordChoosing/>}/>
+          <Route path="/waiting" element={<Waiting/>}/>
         </Routes>
     </div>
     </BrowserRouter>

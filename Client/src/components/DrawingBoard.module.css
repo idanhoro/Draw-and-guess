@@ -1,0 +1,25 @@
+.board__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.board__container button{
+    margin: 0.6rem;
+    border-radius: 28px;
+    padding: 0.2rem;
+}
+.board__container button:hover{
+ cursor: pointer;
+ outline: none;
+ background-color: lightcyan;
+transition: ease-in-out .8s;
+/* transform: scale(1.1,1.2) rotate(360deg); */
+}
+.board__container button span{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0.5rem;
+    padding: 1.2rem;
+}

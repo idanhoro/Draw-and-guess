@@ -1,16 +1,21 @@
 // occupiedRooms = []
 const maxLimitRooms = 5;
 
+const getAvilableRoom = () => {
+    let roomID = Math.floor(Math.random()* maxLimitRooms)
+    while(roomID in serverData ){
+        roomID = Math.floor(Math.random()* maxLimitRooms)
+    }
+    return roomID
+}
+
 module.exports.getRoomID = async (req, res) => {
     try {
-        if (serverData.occupiedRooms.length == maxLimitRooms){
+        if (serverData.length == maxLimitRooms){
             return res.status(400).send("All rooms are occupied!")
         }
-        let roomID = Math.floor(Math.random()* maxLimitRooms)
-        while(serverData.occupiedRooms.includes(roomID)){
-            roomID = Math.floor(Math.random()* maxLimitRooms)
-        }
-        serverData.occupiedRooms.push(roomID)
+        const roomID = getAvilableRoom()
+        serverData[roomID] = {drawing:{data:[], ready:false}, occupied : false, chosenWord:""}
         return res.status(200).json(roomID)
 
     } catch (error) {
@@ -21,14 +26,28 @@ module.exports.getRoomID = async (req, res) => {
 
 module.exports.releaseRoom = async (req, res) => {
     try {
-        const index = serverData.occupiedRooms.indexOf(req.body.roomID)
-        serverData.occupiedRooms.splice(index, 1)
-        //TODO: Change to localStorage
-        delete serverData.drawing[req.body.roomID]
+        delete serverData[req.headers["room-id"]]
         return res.status(200).send("Room released successfully")
         
     } catch (error) {
         console.log(error)
         return res.status(400).send("Error occurred during releasing room.")
+    }
+}
+module.exports.joinRoom = async (req, res) => {
+    try {
+        const {roomID} = req.body
+        if(!(roomID in serverData)){
+            return res.status(500).send("This room is not exist!")
+        }
+        if(serverData[roomID].occupied){
+            return res.status(500).send("This room is already full")
+        }
+        serverData[roomID].occupied = true;
+        return res.status(200).send(roomID)
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(400).send("Error occurred during joining room.")
     }
 }

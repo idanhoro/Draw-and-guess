@@ -1,29 +1,38 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Axios from 'axios'
+import classes from './WordChoosingButtons.module.css'
+import { useNavigate } from 'react-router'
 
-function WordChoosingButtons(){
+function WordChoosingButtons() {
     const [wordBank, setWordBank] = useState([])
 
-    useEffect(()=>{
+    const navigate = useNavigate()
+    useEffect(() => {
         Axios.get('http://localhost:3008/Words/getRandomsWords')
-            .then((req)=>{
-                setWordBank(req.data)
-                console.log(req.data)
-
-            }).catch((error)=>{
+            .then((res) => {
+                setWordBank(res.data)
+            }).catch((error) => {
                 console.log(error)
-            }) 
-    },[])
-    const sendWord = (event) =>{
+            })
+    }, [])
+    const sendWord = (event) => {
+        Axios.post('http://localhost:3008/words/receivingChosenWord', 
+        { word: event.currentTarget.textContent },
+        { headers: { "room-id": localStorage.getItem("RoomID") } })
+            .then((res) => {
+                navigate('/draw')
+            }).catch((error) => {
+                console.log(error)
+            })
         console.log(event.currentTarget.textContent)
-        
+
     }
     return (
-        <div>
-            <h1>WordChoosing</h1>
-            {wordBank.map((item)=>{
-                return (<div><br/>
-                <button onClick={sendWord}>{item}</button>
+        <div className={classes.container}>
+            <h1>Word choosing</h1>
+            {wordBank.map((item) => {
+                return (<div><br />
+                    <button onClick={sendWord}><span>{item}</span></button>
                 </div>
                 )
             })}

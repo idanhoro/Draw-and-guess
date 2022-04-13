@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Axios from 'axios'
+import classes from './GuessingBoard.module.css'
 
 function GuessingBoard() {
     const canvasRef = useRef(null)
@@ -9,25 +10,25 @@ function GuessingBoard() {
     const [data, setData] = useState([])
     var interval
     const requestData = async () => {
-        if (isReady){
+        if (isReady) {
             return
         }
         interval = setInterval(() => {
             Axios.get('http://localhost:3008/drawingBoard/getData',
-            {headers:{"room-id":localStorage.getItem("RoomID")}})
-            .then((req)=>{
-                console.log(req)
-                if (req.data.ready){
-                    setData(req.data.data);
-                    setIsReady(true)
-                    clearInterval(interval);
-                }
-            }).catch((error)=>{
-                console.log(error)
-            }) 
+                { headers: { "room-id": localStorage.getItem("RoomID") } })
+                .then((req) => {
+                    console.log(req)
+                    if (req.data.ready) {
+                        setData(req.data.data);
+                        setIsReady(true)
+                        clearInterval(interval);
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                })
         }, 5000);
     }
-    
+
     useEffect(() => {
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
@@ -45,37 +46,42 @@ function GuessingBoard() {
 
     const draw = async () => {
         contextRef.current.clearRect(0, 0, contextRef.current.canvas.width, contextRef.current.canvas.height);
-        let previous = {time:data[0].time};
+        let previous = { time: data[0].time };
         setIsReady(false)
         data.forEach(async (element, i) => {
             setTimeout(() => {
-                if (element.start){
+                if (element.start) {
                     contextRef.current.closePath();
                     contextRef.current.beginPath();
                     contextRef.current.moveTo(element.x, element.y);
                 }
-                else{
+                else {
                     contextRef.current.lineTo(element.x, element.y);
                     contextRef.current.stroke();
                 }
-                if (i === data.length - 1){
+                if (i === data.length - 1) {
                     setIsReady(true)
                 }
                 previous = element
-            },(element.time-previous.time))
+            }, (element.time - previous.time))
         });
     }
-  return (
-    <div>
-       <canvas
+    return (
+        <div className={classes.guess__container}>
+            <h1>Guessing</h1>
+            <canvas
                 style={{ border: `1px solid #000` }}
                 ref={canvasRef}
             />
-            <br/>
             <button onClick={draw} disabled={!isReady}>View drawing</button>
-    </div>
-    
-  )
+            <div className={classes.input__container}>
+            <label>Answer: </label>
+            <input className={classes.input}></input>
+            <button className={classes.btn} >Submit</button>
+            </div>
+        </div>
+
+    )
 }
 
 export default GuessingBoard

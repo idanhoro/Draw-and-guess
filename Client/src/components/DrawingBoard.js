@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Axios from 'axios'
+import classes from './DrawingBoard.module.css'
 
 const DrawingBoard = () => {
     const canvasRef = useRef(null)
@@ -86,7 +87,7 @@ const DrawingBoard = () => {
     }
 
     return (
-        <div>
+        <div className={classes.board__container}>
             <h1>DrawingBoard</h1>
 
             <canvas
