@@ -16,6 +16,7 @@ function WordChoosingButtons(){
     },[])
     const sendWord = (event) =>{
         console.log(event.currentTarget.textContent)
+        
     }
     return (
         <div>
