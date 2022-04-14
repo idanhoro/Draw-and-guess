@@ -1,5 +1,17 @@
 const randomWords = require('random-words');
+const { get } = require('../routes/Users');
 
+const getScoreByLength = (word) => {
+    switch(word.length){
+        case 3:
+        case 4:
+            return 1
+        case 5:
+            return 3
+        case 6:
+            return 5
+    }
+}
 const getWordsAtMaxAndMinLength = (options) => {
     var rightSize = false;
     var wordUsed;
@@ -43,7 +55,8 @@ module.exports.receivingSubmitWord = async (req, res) => {
         serverData[req.headers['room-id']].roundOver = true
 
         const {chosenWord} = serverData[req.headers['room-id']]
-        if (chosenWord === req.body.word) {
+        if (chosenWord === req.body.word.toLowerCase()) {
+            serverData[req.headers['room-id']].SessionScore += getScoreByLength(chosenWord)
             res.status(200).json({ isMatch: true})
             } 
 
@@ -52,7 +65,7 @@ module.exports.receivingSubmitWord = async (req, res) => {
         }
 
         serverData[req.headers['room-id']].drawing = {data:[], ready:false}
-        
+
     } catch (error) {
         console.log(error)
         return

@@ -75,7 +75,8 @@ module.exports.checkIfRoundOver = async (req,res) =>{
 }
 module.exports.getSessionScore = async (req, res) => {
     try {
-        const SessionScore = serverData[req.headers['room-id']].SessionScore
+        const {SessionScore} = serverData[req.headers['room-id']]
+        console.log(SessionScore);
         return res.status(200).json(SessionScore)    
     } catch (error) {
         return res.status(400).send("Error occurred during get the session score.")

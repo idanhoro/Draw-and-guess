@@ -5,6 +5,7 @@ function Guessing() {
   return (
     <div>
       <GuessingBoard/>
+    
     </div>
   )
 }

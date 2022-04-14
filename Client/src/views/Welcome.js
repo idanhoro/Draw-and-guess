@@ -39,7 +39,7 @@ const Welcome = () => {
         <br/>
         <div className={classes.input__container}>
         <label>Enter Room ID: </label>
-        <input className={classes.input} type="text" id="Room ID" onChange={(event)=>{setRoomID(event.target.value)}}></input>
+        <input className={classes.input} type="number" id="Room ID" onChange={(event)=>{setRoomID(event.target.value)}}></input>
         <button className={classes.btn} onClick={joinRoom}>Join</button>
         </div>
 

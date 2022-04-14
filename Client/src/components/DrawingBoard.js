@@ -21,12 +21,12 @@ const DrawingBoard = () => {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        canvas.style.width = `${window.innerWidth * 0.5}px`;
-        canvas.style.height = `${window.innerHeight * 0.5}px`;
+        canvas.width = 255;
+        canvas.height = 255;
+        canvas.style.width = `225px`;
+        canvas.style.height = `225px`;
         const context = canvas.getContext("2d")
-        context.scale(2, 2)
+        context.scale(10/9, 10/9)
         context.lineCap = "round";
         context.strokeStyle = "black";
         context.lineWidth = 5
@@ -125,10 +125,10 @@ const DrawingBoard = () => {
     }
 
     const getSessionScore = () => {
-        Axios.get(`${server}/words/getSessionScore`,
+        Axios.get(`${server}/users/getSessionScore`,
         { headers: { "room-id": localStorage.getItem("RoomID") }})
         .then((res) => {
-                setSessionScore(res.data.sessionScore)
+                setSessionScore(res.data)
         }).catch((error)=>{
             console.log(error);
         })

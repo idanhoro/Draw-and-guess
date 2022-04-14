@@ -7,13 +7,34 @@ import { useNavigate } from 'react-router'
 function GuessingBoard() {
     const canvasRef = useRef(null)
     const contextRef = useRef(null)
+
     const [isReady, setIsReady] = useState(false)
     const [submittedWord, setSubmittedWord] = useState('')
-    const navigate = useNavigate()
     const [data, setData] = useState([])
     const [sessionScore, setSessionScore] = useState(0)
+    const [isViewing, setisViewing] = useState(false)
+
+    const navigate = useNavigate()
+
 
     var interval
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        canvas.width = 255;
+        canvas.height = 255;
+        canvas.style.width = `225px`;
+        canvas.style.height = `225px`;
+        const context = canvas.getContext("2d")
+        context.scale(10/9, 10/9)
+        context.lineCap = "round";
+        context.strokeStyle = "black";
+        context.lineWidth = 5
+        contextRef.current = context;
+        requestData()
+        getSessionScore()
+    }, [])
+    
     const requestData = async () => {
         if (isReady) {
             return
@@ -34,26 +55,10 @@ function GuessingBoard() {
         }, 5000);
     }
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        canvas.style.width = `${window.innerWidth * 0.5}px`;
-        canvas.style.height = `${window.innerHeight * 0.5}px`;
-        const context = canvas.getContext("2d")
-        context.scale(2, 2)
-        context.lineCap = "round";
-        context.strokeStyle = "black";
-        context.lineWidth = 5
-        contextRef.current = context;
-        requestData()
-        getSessionScore()
-    }, [])
-
     const draw = async () => {
         contextRef.current.clearRect(0, 0, contextRef.current.canvas.width, contextRef.current.canvas.height);
         let previous = { time: data[0].time };
-        setIsReady(false)
+        setisViewing(true)
         data.forEach(async (element, i) => {
             setTimeout(() => {
                 if (element.start) {
@@ -66,7 +71,7 @@ function GuessingBoard() {
                     contextRef.current.stroke();
                 }
                 if (i === data.length - 1) {
-                    setIsReady(true)
+                    setisViewing(false)
                 }
                 previous = element
             }, (element.time - previous.time))
@@ -93,10 +98,10 @@ function GuessingBoard() {
         })
     }
     const getSessionScore = () => {
-        Axios.get(`${server}/words/getSessionScore`,
+        Axios.get(`${server}/users/getSessionScore`,
         { headers: { "room-id": localStorage.getItem("RoomID") }})
         .then((res) => {
-                setSessionScore(res.data.sessionScore)
+                setSessionScore(res.data)
         }).catch((error)=>{
             console.log(error);
         })
@@ -109,14 +114,16 @@ function GuessingBoard() {
                 style={{ border: `1px solid #000` }}
                 ref={canvasRef}
             />
-            <button onClick={draw} disabled={!isReady}>View drawing</button>
-            <div className={classes.input__container}>
-            <label>Answer: </label>
-            <input className={classes.input} onChange={(event)=>{setSubmittedWord(event.target.value)}}></input>
-            <button className={classes.btn} onClick={handleSubmit} >Submit</button>
-            </div>
+            {!isReady ? (<h2>Waiting for other player to draw</h2>) :
+            (<div>
+                <button onClick={draw} disabled={isViewing}>View drawing</button>
+                <div className={classes.input__container}>
+                    <label>Answer: </label>
+                    <input className={classes.input} onChange={(event)=>{setSubmittedWord(event.target.value)}}></input>
+                    <button className={classes.btn} onClick={handleSubmit} >Submit</button>
+                </div>
+            </div>)}
         </div>
-
     )
 }
 
