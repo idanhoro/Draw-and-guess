@@ -63,7 +63,11 @@ module.exports.checkIfJoined =async (req,res) => {
 
 module.exports.checkIfRoundOver = async (req,res) =>{
     try {
-        return res.status(200).send(serverData[req.headers['room-id']].roundOver)
+        if(serverData[req.headers['room-id']].roundOver){
+            serverData[req.headers['room-id']].roundOver = false    
+            return res.status(200).send(true)
+        }
+        return res.status(200).send(false)
     } catch (error) {
         console.log(error);
         return res.status(400).send("Error occurred during checking if the round is over")

@@ -44,13 +44,15 @@ module.exports.receivingSubmitWord = async (req, res) => {
 
         const {chosenWord} = serverData[req.headers['room-id']]
         if (chosenWord === req.body.word) {
-            return res.status(200).json({ isMatch: true})
+            res.status(200).json({ isMatch: true})
             } 
 
         else {
-            return res.status(200).json({ isMatch: false })
+            res.status(200).json({ isMatch: false })
         }
 
+        serverData[req.headers['room-id']].drawing = {data:[], ready:false}
+        
     } catch (error) {
         console.log(error)
         return
@@ -68,12 +70,3 @@ module.exports.getChosenWord = async (req, res) => {
     }
 }
 
-module.exports.getSessionScore = async (req, res) => {
-    try {
-        const SessionScore = serverData[req.headers['room-id']].SessionScore
-        return res.status(200).json(SessionScore)    
-    } catch (error) {
-        return res.status(400).send("Error occurred during get the session score.")
-
-    }
-}
