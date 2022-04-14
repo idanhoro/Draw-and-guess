@@ -1,6 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router';
+import Axios from 'axios';
+import server from '../ServerInfo';
 
 function Waiting() {
+    var interval
+    const navigate = useNavigate()
+    const checkIfJoined = async () => {
+
+        interval = setInterval(() => {
+            Axios.get(`${server}/users/checkIfJoined`,
+                { headers: { "room-id": localStorage.getItem("RoomID") } })
+                .then((res) => {
+                    if(res.data){
+                        clearInterval(interval);
+                        navigate('/wordChoosing')
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                })
+        }, 5000);
+    }
+    useEffect(()=>{
+        checkIfJoined()
+    })
     return (
         <div>
             <h1 style={{textAlign: 'center', marginTop:'80px'}}>Waiting</h1>

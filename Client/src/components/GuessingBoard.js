@@ -1,20 +1,25 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Axios from 'axios'
 import classes from './GuessingBoard.module.css'
+import server from '../ServerInfo'
+import { useNavigate } from 'react-router'
 
 function GuessingBoard() {
     const canvasRef = useRef(null)
     const contextRef = useRef(null)
     const [isReady, setIsReady] = useState(false)
-
+    const [submittedWord, setSubmittedWord] = useState('')
+    const navigate = useNavigate()
     const [data, setData] = useState([])
+    const [sessionScore, setSessionScore] = useState(0)
+
     var interval
     const requestData = async () => {
         if (isReady) {
             return
         }
         interval = setInterval(() => {
-            Axios.get('http://localhost:3008/drawingBoard/getData',
+            Axios.get(`${server}/drawingBoard/getData`,
                 { headers: { "room-id": localStorage.getItem("RoomID") } })
                 .then((req) => {
                     console.log(req)
@@ -42,6 +47,7 @@ function GuessingBoard() {
         context.lineWidth = 5
         contextRef.current = context;
         requestData()
+        getSessionScore()
     }, [])
 
     const draw = async () => {
@@ -66,9 +72,39 @@ function GuessingBoard() {
             }, (element.time - previous.time))
         });
     }
+    const handleSubmit = () =>{
+        Axios.post(`${server}/words/receivingSubmitWord`,
+        {word:submittedWord},
+        { headers: { "room-id": localStorage.getItem("RoomID") } })
+        .then((res)=>{
+            const {isMatch} = res.data
+            if(isMatch){
+
+                alert('Correct answer')
+            }
+            else{
+                alert('Incorrect answer')
+            }
+
+            navigate('/wordChoosing')
+
+        }).catch((error) =>{
+            console.log(error);
+        })
+    }
+    const getSessionScore = () => {
+        Axios.get(`${server}/words/getSessionScore`,
+        { headers: { "room-id": localStorage.getItem("RoomID") }})
+        .then((res) => {
+                setSessionScore(res.data.sessionScore)
+        }).catch((error)=>{
+            console.log(error);
+        })
+    }
     return (
         <div className={classes.guess__container}>
             <h1>Guessing</h1>
+            <h2>Session Score : {sessionScore}</h2>
             <canvas
                 style={{ border: `1px solid #000` }}
                 ref={canvasRef}
@@ -76,8 +112,8 @@ function GuessingBoard() {
             <button onClick={draw} disabled={!isReady}>View drawing</button>
             <div className={classes.input__container}>
             <label>Answer: </label>
-            <input className={classes.input}></input>
-            <button className={classes.btn} >Submit</button>
+            <input className={classes.input} onChange={(event)=>{setSubmittedWord(event.target.value)}}></input>
+            <button className={classes.btn} onClick={handleSubmit} >Submit</button>
             </div>
         </div>
 

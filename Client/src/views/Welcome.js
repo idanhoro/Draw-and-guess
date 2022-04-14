@@ -2,26 +2,27 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import classes from './Welcome.module.css'
 import { useNavigate } from 'react-router'
+import server from '../ServerInfo'
 
 const Welcome = () => {
   const [roomID, setRoomID] = useState()
   const navigate = useNavigate()
 
   const requestNewRoom = () =>{
-    Axios.get('http://localhost:3008/users/getRoomID')
+    Axios.get(`${server}/users/getRoomID`)
     .then((res)=>{
       localStorage.setItem('RoomID', res.data)
-      navigate('/waitting')
+      navigate('/waiting')
   }).catch((error)=>{
       console.log(error)
   });
 }
 
   const joinRoom = () =>{
-    Axios.post('http://localhost:3008/users/joinRoom', {roomID})
+    Axios.post(`${server}/users/joinRoom`, {roomID})
     .then((res) =>{
-      console.log(res.data)
       localStorage.setItem('RoomID', res.data)
+      navigate('/guess')
     })
     .catch((error) =>{
       console.log(error)  
@@ -34,8 +35,10 @@ const Welcome = () => {
         <h1>Draw & Guess</h1>
         
         <button className={`${classes.create__room} ${classes.btn}`} onClick={requestNewRoom}>Create new room</button>
+
+        <br/>
         <div className={classes.input__container}>
-        <label>Room ID: </label>
+        <label>Enter Room ID: </label>
         <input className={classes.input} type="text" id="Room ID" onChange={(event)=>{setRoomID(event.target.value)}}></input>
         <button className={classes.btn} onClick={joinRoom}>Join</button>
         </div>

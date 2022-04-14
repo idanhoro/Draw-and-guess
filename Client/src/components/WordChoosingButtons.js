@@ -2,13 +2,14 @@ import React, { useEffect, useState, useRef } from 'react'
 import Axios from 'axios'
 import classes from './WordChoosingButtons.module.css'
 import { useNavigate } from 'react-router'
+import server from '../ServerInfo'
 
 function WordChoosingButtons() {
     const [wordBank, setWordBank] = useState([])
 
     const navigate = useNavigate()
     useEffect(() => {
-        Axios.get('http://localhost:3008/Words/getRandomsWords')
+        Axios.get(`${server}/Words/getRandomsWords`)
             .then((res) => {
                 setWordBank(res.data)
             }).catch((error) => {
@@ -16,7 +17,7 @@ function WordChoosingButtons() {
             })
     }, [])
     const sendWord = (event) => {
-        Axios.post('http://localhost:3008/words/receivingChosenWord', 
+        Axios.post(`${server}/words/receivingChosenWord`, 
         { word: event.currentTarget.textContent },
         { headers: { "room-id": localStorage.getItem("RoomID") } })
             .then((res) => {
@@ -24,8 +25,6 @@ function WordChoosingButtons() {
             }).catch((error) => {
                 console.log(error)
             })
-        console.log(event.currentTarget.textContent)
-
     }
     return (
         <div className={classes.container}>

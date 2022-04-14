@@ -15,7 +15,7 @@ module.exports.getRoomID = async (req, res) => {
             return res.status(400).send("All rooms are occupied!")
         }
         const roomID = getAvilableRoom()
-        serverData[roomID] = {drawing:{data:[], ready:false}, occupied : false, chosenWord:""}
+        serverData[roomID] = {drawing:{data:[], ready:false}, occupied : false, chosenWord:"", roundOver : false, SessionScore: 0}
         return res.status(200).json(roomID)
 
     } catch (error) {
@@ -49,5 +49,32 @@ module.exports.joinRoom = async (req, res) => {
     } catch (error) {
         console.log(error)
         return res.status(400).send("Error occurred during joining room.")
+    }
+}
+
+module.exports.checkIfJoined =async (req,res) => {
+    try {
+        return res.status(200).send(serverData[req.headers["room-id"]].occupied)
+    } catch (error) {
+        console.log(error)
+        return res.status(400).send("Error occurred during checking if second player joined the room.")
+    }
+}
+
+module.exports.checkIfRoundOver = async (req,res) =>{
+    try {
+        return res.status(200).send(serverData[req.headers['room-id']].roundOver)
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send("Error occurred during checking if the round is over")
+    }
+}
+module.exports.getSessionScore = async (req, res) => {
+    try {
+        const SessionScore = serverData[req.headers['room-id']].SessionScore
+        return res.status(200).json(SessionScore)    
+    } catch (error) {
+        return res.status(400).send("Error occurred during get the session score.")
+
     }
 }
