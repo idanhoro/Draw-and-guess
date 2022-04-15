@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import Axios from 'axios'
 import server from '../ServerInfo'
+import { toast } from 'react-toastify'
+
 
 
 const ExitButton = () => {
@@ -23,9 +25,10 @@ const ExitButton = () => {
                         navigate('/waiting')
                     }
                 }).catch((error) => {
-                    console.log(error)
+                    const message = error.response ? error.response.data : "Network Error";
+                    toast.error(message)
                 })
-        }, 5000);
+        }, 2000);
     }
 
 
@@ -35,7 +38,8 @@ const ExitButton = () => {
             .then((res) => {
                 navigate('/')
             }).catch((error) => {
-                console.log(error);
+                const message = error.response ? error.response.data : "Network Error";
+                toast.error(message);
             })
     }
 

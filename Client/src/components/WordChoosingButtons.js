@@ -3,6 +3,8 @@ import Axios from 'axios'
 import classes from './WordChoosingButtons.module.css'
 import { useNavigate } from 'react-router'
 import server from '../ServerInfo'
+import { toast } from 'react-toastify'
+
 
 function WordChoosingButtons() {
     const [wordBank, setWordBank] = useState([])
@@ -13,7 +15,8 @@ function WordChoosingButtons() {
             .then((res) => {
                 setWordBank(res.data)
             }).catch((error) => {
-                console.log(error)
+                const message = error.response ? error.response.data : "Network Error";
+                toast.error(message)
             })
     }, [])
     const sendWord = (event) => {
@@ -23,7 +26,8 @@ function WordChoosingButtons() {
             .then((res) => {
                 navigate('/draw')
             }).catch((error) => {
-                console.log(error)
+                const message = error.response ? error.response.data : "Network Error";
+                toast.error(message)
             })
     }
     return (

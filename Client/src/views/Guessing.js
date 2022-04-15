@@ -5,6 +5,8 @@ import Axios from 'axios'
 import server from '../ServerInfo'
 import classes from './Guessing.module.css'
 import ExitButton from '../components/ExitButton'
+import { toast } from 'react-toastify'
+
 
 const Guessing = () => {
 
@@ -22,7 +24,8 @@ const Guessing = () => {
       .then((res) => {
         setSessionScore(res.data)
       }).catch((error) => {
-        console.log(error);
+        const message = error.response ? error.response.data : "Network Error";
+        toast.error(message)
       })
   }
 

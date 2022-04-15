@@ -49,7 +49,8 @@ function GuessingBoard() {
                         clearInterval(interval);
                     }
                 }).catch((error) => {
-                    console.log(error)
+                    const message = error.response ? error.response.data : "Network Error";
+                    toast.error(message)
                 })
         }, 5000);
     }
@@ -83,18 +84,17 @@ function GuessingBoard() {
         .then((res)=>{
             const {isMatch} = res.data
             if(isMatch){
-
-                // alert('Correct answer')
                 toast.success('Correct answer')
             }
             else{
-                alert('Incorrect answer')
+                toast.warning('Incorrect answer')
             }
 
             navigate('/wordChoosing')
 
         }).catch((error) =>{
-            console.log(error);
+            const message = error.response ? error.response.data : "Network Error";
+            toast.error(message)
         })
     }
     return (

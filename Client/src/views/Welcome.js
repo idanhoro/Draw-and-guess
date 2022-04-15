@@ -29,7 +29,8 @@ const Welcome = () => {
       navigate('/guess')
     })
     .catch((error) =>{
-      console.log(error)  
+      const message = error.response ? error.response.data : "Network Error";
+      toast.error(message)  
     });
   }
 

@@ -4,6 +4,8 @@ import Axios from 'axios';
 import server from '../ServerInfo';
 import ExitButton from '../components/ExitButton';
 import classes from './Waiting.module.css'
+import { toast } from 'react-toastify'
+
 
 function Waiting() {
     var interval
@@ -20,7 +22,8 @@ function Waiting() {
                         navigate('/wordChoosing')
                     }
                 }).catch((error) => {
-                    console.log(error)
+                    const message = error.response ? error.response.data : "Network Error";
+                    toast.error(message)
                 })
         }, 5000);
     }

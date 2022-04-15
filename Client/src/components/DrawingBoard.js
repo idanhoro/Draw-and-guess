@@ -4,6 +4,8 @@ import Axios from 'axios'
 import classes from './DrawingBoard.module.css'
 import server from '../ServerInfo'
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify'
+
 
 const DrawingBoard = () => {
     const canvasRef = useRef(null)
@@ -87,10 +89,12 @@ const DrawingBoard = () => {
             data,
             { headers: { "room-id": localStorage.getItem("RoomID") } })
             .then((res) => {
+                toast.success(res.data)
                 setIsSent(true)
                 checkIfRoundOver()
             }).catch((error) => {
-                console.log(error)
+                const message = error.response ? error.response.data : "Network Error";
+                toast.error(message)
             })
     }
 
@@ -104,7 +108,8 @@ const DrawingBoard = () => {
                         navigate('/guess')
                     }
                 }).catch((error) => {
-                    console.log(error)
+                    const message = error.response ? error.response.data : "Network Error";
+                    toast.error(message)
                 })
         }, 5000);
     }

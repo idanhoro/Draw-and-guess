@@ -5,6 +5,7 @@ import Axios from 'axios'
 import server from '../ServerInfo'
 import classes from './Drawing.module.css'
 import ExitButton from '../components/ExitButton'
+import { toast } from 'react-toastify'
 
 const Drawing = () => {
 
@@ -25,7 +26,8 @@ const Drawing = () => {
       .then((res) => {
         setChosenWord(res.data.word)
       }).catch((error) => {
-        console.log(error);
+        const message = error.response ? error.response.data : "Network Error";
+        toast.error(message)
       })
   }
 
@@ -35,7 +37,8 @@ const Drawing = () => {
       .then((res) => {
         setSessionScore(res.data)
       }).catch((error) => {
-        console.log(error);
+        const message = error.response ? error.response.data : "Network Error";
+        toast.error(message)
       })
   }
   return (

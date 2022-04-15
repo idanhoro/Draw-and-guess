@@ -41,7 +41,7 @@ module.exports.joinRoom = async (req, res) => {
     try {
         const {roomID} = req.body
         if(!(roomID in serverData)){
-            return res.status(500).send("This room is not exist!")
+            return res.status(500).send("This room is not exist !")
         }
         if(serverData[roomID].PlayersInRoom > 1){
             return res.status(500).send("This room is already full")
