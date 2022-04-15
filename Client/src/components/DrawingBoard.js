@@ -57,23 +57,23 @@ const DrawingBoard = () => {
     }
     // Touch Listener
     const startDrawingTouch = (nativeEvent) => {
-        const { clientX, clientY } = nativeEvent.changedTouches[0];
-        const offsetX = clientX - canvasRef.current.offsetLeft
-        const offsetY = clientY - canvasRef.current.offsetTop
+        const { pageX, pageY } = nativeEvent.changedTouches[0];
+        const offsetX = pageX - canvasRef.current.offsetLeft
+        const offsetY = pageY - canvasRef.current.offsetTop
         contextRef.current.beginPath();
         contextRef.current.moveTo(offsetX, offsetY);
         setIsDrawing(true)
         let date = new Date()
-        setData([...data, { x: clientX, y: clientY, start: true, time: date.getTime() }])
+        setData([...data, { x: offsetX, y: offsetY, start: true, time: date.getTime() }])
     }
     const moveDrawingTouch = (nativeEvent) => {
-        const { clientX, clientY } = nativeEvent.changedTouches[0];
-        const offsetX = clientX - canvasRef.current.offsetLeft
-        const offsetY = clientY - canvasRef.current.offsetTop
+        const { pageX, pageY } = nativeEvent.changedTouches[0];
+        const offsetX = pageX - canvasRef.current.offsetLeft
+        const offsetY = pageY - canvasRef.current.offsetTop
         contextRef.current.lineTo(offsetX, offsetY)
         contextRef.current.stroke()
         let date = new Date()
-        setData([...data, { x: clientX, y: clientY, start: false, time: date.getTime() }])
+        setData([...data, { x: offsetX, y: offsetY, start: false, time: date.getTime() }])
     }
 
     const finishDrawingTouch = (nativeEvent) => {
