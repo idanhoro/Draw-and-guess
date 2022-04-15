@@ -41,7 +41,6 @@ module.exports.getRandomWords = async (req, res) => {
 
 module.exports.receivingChosenWord = async (req, res) => {
     try {
-        // console.log(serverData);
         serverData[req.headers["room-id"]].chosenWord = req.body.word
         return res.status(200).send("Word received successfully")
     } catch (error) {

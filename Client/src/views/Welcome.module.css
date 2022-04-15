@@ -39,7 +39,7 @@
     
     .input__container input{
         margin-top: 0.5rem;
-        border: 1px solid black;
+        border: 1px solid rgb(255, 255, 255);
         outline: none;
         padding: 0.1rem;
         font-size: 1rem;

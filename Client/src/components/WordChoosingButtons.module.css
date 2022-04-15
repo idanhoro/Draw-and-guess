@@ -1,5 +1,5 @@
 .container{
-    background-color:DodgerBlue;
+    /* background-color:DodgerBlue; */
     display: flex;
     justify-content: center;
     flex-direction: column;

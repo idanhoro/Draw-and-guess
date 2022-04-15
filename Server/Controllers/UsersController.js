@@ -11,11 +11,11 @@ const getAvilableRoom = () => {
 
 module.exports.getRoomID = async (req, res) => {
     try {
-        if (serverData.length == maxLimitRooms){
+        if (Object.keys(serverData).length == maxLimitRooms){
             return res.status(400).send("All rooms are occupied!")
         }
         const roomID = getAvilableRoom()
-        serverData[roomID] = {drawing:{data:[], ready:false}, occupied : false, chosenWord:"", roundOver : false, SessionScore: 0}
+        serverData[roomID] = {drawing:{data:[], ready:false}, PlayersInRoom : 1, chosenWord:"", roundOver : false, SessionScore: 0,}
         return res.status(200).json(roomID)
 
     } catch (error) {
@@ -26,7 +26,10 @@ module.exports.getRoomID = async (req, res) => {
 
 module.exports.releaseRoom = async (req, res) => {
     try {
-        delete serverData[req.headers["room-id"]]
+        serverData[req.headers['room-id']].PlayersInRoom -= 1
+        if(serverData[req.headers['room-id']].PlayersInRoom == 0){
+            delete serverData[req.headers["room-id"]]
+        }
         return res.status(200).send("Room released successfully")
         
     } catch (error) {
@@ -40,10 +43,10 @@ module.exports.joinRoom = async (req, res) => {
         if(!(roomID in serverData)){
             return res.status(500).send("This room is not exist!")
         }
-        if(serverData[roomID].occupied){
+        if(serverData[roomID].PlayersInRoom > 1){
             return res.status(500).send("This room is already full")
         }
-        serverData[roomID].occupied = true;
+        serverData[roomID].PlayersInRoom = 2;
         return res.status(200).send(roomID)
         
     } catch (error) {
@@ -52,9 +55,9 @@ module.exports.joinRoom = async (req, res) => {
     }
 }
 
-module.exports.checkIfJoined =async (req,res) => {
+module.exports.checkAmountOfPlayers =async (req,res) => {
     try {
-        return res.status(200).send(serverData[req.headers["room-id"]].occupied)
+        return res.status(200).json(serverData[req.headers["room-id"]].PlayersInRoom)
     } catch (error) {
         console.log(error)
         return res.status(400).send("Error occurred during checking if second player joined the room.")
@@ -76,10 +79,10 @@ module.exports.checkIfRoundOver = async (req,res) =>{
 module.exports.getSessionScore = async (req, res) => {
     try {
         const {SessionScore} = serverData[req.headers['room-id']]
-        console.log(SessionScore);
         return res.status(200).json(SessionScore)    
     } catch (error) {
         return res.status(400).send("Error occurred during get the session score.")
 
     }
 }
+

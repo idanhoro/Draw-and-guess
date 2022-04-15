@@ -6,7 +6,6 @@ module.exports.getDrawingData = async (req, res) => {
         if(!(req.headers["room-id"] in serverData)){
             return res.status(200).json({ready: false, data : []})
         }
-        // console.log(drawing.req.headers["room-id"])
         return res.status(200).json(serverData[req.headers["room-id"]].drawing)
         
 

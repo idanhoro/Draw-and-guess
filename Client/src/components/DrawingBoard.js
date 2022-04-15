@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react'
 import Axios from 'axios'
 import classes from './DrawingBoard.module.css'
@@ -9,11 +10,7 @@ const DrawingBoard = () => {
     const contextRef = useRef(null)
     const [isDrawing, setIsDrawing] = useState(false)
     const [data, setData] = useState([])
-    const [chosenWord, setChosenWord] = useState('')
-    const [sessionScore, setSessionScore] = useState(0)
-
     const [isSent, setIsSent] = useState(false)
-
 
     const navigate = useNavigate()
     var interval
@@ -26,13 +23,11 @@ const DrawingBoard = () => {
         canvas.style.width = `225px`;
         canvas.style.height = `225px`;
         const context = canvas.getContext("2d")
-        context.scale(10/9, 10/9)
+        context.scale(10 / 9, 10 / 9)
         context.lineCap = "round";
         context.strokeStyle = "black";
         context.lineWidth = 5
         contextRef.current = context;
-        getChosenWord()
-        getSessionScore()
     }, [])
     // Mouse Listener
     const startDrawing = (nativeEvent) => {
@@ -114,32 +109,8 @@ const DrawingBoard = () => {
         }, 5000);
     }
 
-    const getChosenWord = () => {
-        Axios.get(`${server}/words/getChosenWord`,
-            { headers: { "room-id": localStorage.getItem("RoomID") }})
-            .then((res) => {
-                setChosenWord(res.data.word)
-            }).catch((error) => {
-                console.log(error);
-            })
-    }
-
-    const getSessionScore = () => {
-        Axios.get(`${server}/users/getSessionScore`,
-        { headers: { "room-id": localStorage.getItem("RoomID") }})
-        .then((res) => {
-                setSessionScore(res.data)
-        }).catch((error)=>{
-            console.log(error);
-        })
-    }
-
     return (
         <div className={classes.board__container}>
-            <h1>DrawingBoard</h1>
-            <h2>The word you need to draw : {chosenWord}</h2>
-            <h2>Session Score : {sessionScore}</h2>
-
             <canvas
                 style={{ border: `1px solid #000` }}
                 onMouseDown={startDrawing}

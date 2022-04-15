@@ -3,6 +3,8 @@ import Axios from 'axios'
 import classes from './GuessingBoard.module.css'
 import server from '../ServerInfo'
 import { useNavigate } from 'react-router'
+import { toast } from "react-toastify";
+
 
 function GuessingBoard() {
     const canvasRef = useRef(null)
@@ -11,7 +13,6 @@ function GuessingBoard() {
     const [isReady, setIsReady] = useState(false)
     const [submittedWord, setSubmittedWord] = useState('')
     const [data, setData] = useState([])
-    const [sessionScore, setSessionScore] = useState(0)
     const [isViewing, setisViewing] = useState(false)
 
     const navigate = useNavigate()
@@ -32,7 +33,6 @@ function GuessingBoard() {
         context.lineWidth = 5
         contextRef.current = context;
         requestData()
-        getSessionScore()
     }, [])
     
     const requestData = async () => {
@@ -43,7 +43,6 @@ function GuessingBoard() {
             Axios.get(`${server}/drawingBoard/getData`,
                 { headers: { "room-id": localStorage.getItem("RoomID") } })
                 .then((req) => {
-                    console.log(req)
                     if (req.data.ready) {
                         setData(req.data.data);
                         setIsReady(true)
@@ -85,7 +84,8 @@ function GuessingBoard() {
             const {isMatch} = res.data
             if(isMatch){
 
-                alert('Correct answer')
+                // alert('Correct answer')
+                toast.success('Correct answer')
             }
             else{
                 alert('Incorrect answer')
@@ -97,25 +97,14 @@ function GuessingBoard() {
             console.log(error);
         })
     }
-    const getSessionScore = () => {
-        Axios.get(`${server}/users/getSessionScore`,
-        { headers: { "room-id": localStorage.getItem("RoomID") }})
-        .then((res) => {
-                setSessionScore(res.data)
-        }).catch((error)=>{
-            console.log(error);
-        })
-    }
     return (
         <div className={classes.guess__container}>
-            <h1>Guessing</h1>
-            <h2>Session Score : {sessionScore}</h2>
             <canvas
                 style={{ border: `1px solid #000` }}
                 ref={canvasRef}
             />
             {!isReady ? (<h2>Waiting for other player to draw</h2>) :
-            (<div>
+            (<div className={classes.guess__container}>
                 <button onClick={draw} disabled={isViewing}>View drawing</button>
                 <div className={classes.input__container}>
                     <label>Answer: </label>

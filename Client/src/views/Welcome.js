@@ -3,6 +3,8 @@ import Axios from 'axios'
 import classes from './Welcome.module.css'
 import { useNavigate } from 'react-router'
 import server from '../ServerInfo'
+import { toast } from "react-toastify";
+
 
 const Welcome = () => {
   const [roomID, setRoomID] = useState()
@@ -11,10 +13,12 @@ const Welcome = () => {
   const requestNewRoom = () =>{
     Axios.get(`${server}/users/getRoomID`)
     .then((res)=>{
+      toast.success("Room created successfully")
       localStorage.setItem('RoomID', res.data)
       navigate('/waiting')
   }).catch((error)=>{
-      console.log(error)
+      const message = error.response ? error.response.data : "Network Error";
+      toast.error(message)
   });
 }
 

@@ -29,9 +29,9 @@ function WordChoosingButtons() {
     return (
         <div className={classes.container}>
             <h1>Word choosing</h1>
-            {wordBank.map((item) => {
+            {wordBank.map((item,i) => {
                 return (<div><br />
-                    <button onClick={sendWord}><span>{item}</span></button>
+                    <button onClick={sendWord} key={i}><span>{item}</span></button>
                 </div>
                 )
             })}

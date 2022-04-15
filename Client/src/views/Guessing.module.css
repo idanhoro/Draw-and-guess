@@ -1,0 +1,45 @@
+.guess__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.guess__container button{
+    margin: 0.6rem;
+    border-radius: 28px;
+    padding: 0.2rem;
+}
+/* .guess__container button:hover{
+ cursor: pointer;
+ outline: none;
+ background-color: lightcyan;
+transition: ease-in-out .8s;
+transform: scale(1.1,1.2) rotate(360deg);
+} */
+.guess__container button span{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0.5rem;
+    padding: 1.2rem;
+}
+.input__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input__container label{
+    font-size: 1.4rem;
+    font-weight: bolder;
+}
+
+
+.input__container input{
+    margin-top: 0.5rem;
+    border: 1px solid black;
+    outline: none;
+    padding: 0.1rem;
+    font-size: 1rem;
+}
