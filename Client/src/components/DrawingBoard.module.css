@@ -1,9 +1,11 @@
+
 .board__container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 40px;
+    overscroll-behavior-y: contain;
 }
 
 .board__container button{
@@ -14,9 +16,7 @@
 .board__container button:hover{
  cursor: pointer;
  outline: none;
- background-color: lightcyan;
 transition: ease-in-out .8s;
-/* transform: scale(1.1,1.2) rotate(360deg); */
 }
 .board__container button span{
     font-size: 1.2rem;

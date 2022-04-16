@@ -1,10 +1,10 @@
 // occupiedRooms = []
-const maxLimitRooms = 5;
+const maxLimitRooms = 100;
 
 const getAvilableRoom = () => {
-    let roomID = Math.floor(Math.random()* maxLimitRooms)
+    let roomID = Math.floor(Math.random()* maxLimitRooms)+1
     while(roomID in serverData ){
-        roomID = Math.floor(Math.random()* maxLimitRooms)
+        roomID = Math.floor(Math.random()* maxLimitRooms)+1
     }
     return roomID
 }
@@ -57,10 +57,9 @@ module.exports.joinRoom = async (req, res) => {
 
 module.exports.checkAmountOfPlayers =async (req,res) => {
     try {
-        console.log("Server rooms:" , serverData);
-        console.log('Room ID: ' ,req.headers["room-id"]);
-        console.log('Room data:' ,serverData[req.headers["room-id"]])
-        console.log('Players in room:: ', serverData[req.headers["room-id"]].PlayersInRoom);
+        if(!(req.headers['room-id']) in serverData){
+            return res.status(200).json(0)    
+        }
         return res.status(200).json(serverData[req.headers["room-id"]].PlayersInRoom)
     } catch (error) {
         //console.log(error)

@@ -6,7 +6,6 @@ import server from '../ServerInfo'
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify'
 
-
 const DrawingBoard = () => {
     const canvasRef = useRef(null)
     const contextRef = useRef(null)

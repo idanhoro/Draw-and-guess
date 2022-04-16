@@ -4,11 +4,12 @@ import Axios from 'axios'
 import server from '../ServerInfo'
 import { toast } from 'react-toastify'
 
-const headers = { "room-id": localStorage.getItem("RoomID") }
 
 const ExitButton = () => {
     var interval
     const navigate = useNavigate()
+    const headers = { "room-id": localStorage.getItem("RoomID") }
+
 
     useEffect(() => {
         checkIfPlayerLeft()
@@ -17,13 +18,15 @@ const ExitButton = () => {
     const checkIfPlayerLeft = () => {
         interval = setInterval(() => {
 
-            console.log(headers);
+            if(!localStorage.getItem('RoomID')){
+                return clearInterval(interval)
+            }
             Axios.get(`${server}/users/checkAmountOfPlayers`,
                 {headers})
                 .then((res) => {
                     if (res.data == 1) {
-                        navigate('/waiting')
                         clearInterval(interval);
+                        navigate('/waiting')
                     }
                 }).catch((error) => {
                     const message = error.response ? error.response.data : "Network Error";

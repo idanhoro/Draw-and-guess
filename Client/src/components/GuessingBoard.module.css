@@ -10,13 +10,7 @@
     border-radius: 28px;
     padding: 0.2rem;
 }
-/* .guess__container button:hover{
- cursor: pointer;
- outline: none;
- background-color: lightcyan;
-transition: ease-in-out .8s;
-transform: scale(1.1,1.2) rotate(360deg);
-} */
+
 .guess__container button span{
     font-size: 1.2rem;
     font-weight: bold;

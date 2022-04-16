@@ -3,6 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #053555;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23053555' cx='50' cy='0' r='50'/%3E%3Cg fill='%2300375e' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23003967' cx='50' cy='100' r='50'/%3E%3Cg fill='%23003b70' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23003d7a' cx='50' cy='200' r='50'/%3E%3Cg fill='%23003f83' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%2300418c' cx='50' cy='300' r='50'/%3E%3Cg fill='%23004296' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%2300449f' cx='50' cy='400' r='50'/%3E%3Cg fill='%230045a8' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%230046b1' cx='50' cy='500' r='50'/%3E%3Cg fill='%230047ba' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%230047c3' cx='50' cy='600' r='50'/%3E%3Cg fill='%230047cb' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%230047d4' cx='50' cy='700' r='50'/%3E%3Cg fill='%230047dc' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%230046e3' cx='50' cy='800' r='50'/%3E%3Cg fill='%230044eb' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%230042f2' cx='50' cy='900' r='50'/%3E%3Cg fill='%23003ff9' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23133BFF' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: contain;
+    height: 100vh;
 }
 
 .guess__container button{
@@ -10,13 +15,6 @@
     border-radius: 28px;
     padding: 0.2rem;
 }
-/* .guess__container button:hover{
- cursor: pointer;
- outline: none;
- background-color: lightcyan;
-transition: ease-in-out .8s;
-transform: scale(1.1,1.2) rotate(360deg);
-} */
 .guess__container button span{
     font-size: 1.2rem;
     font-weight: bold;
