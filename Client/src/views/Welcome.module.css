@@ -1,69 +1,74 @@
-*{
+* {
     font-family: 'Courier New',
-    Courier,
-    monospace;
-    }
-    .welcome__container{
-        /* background-color: rgb(105, 105, 250); */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100vh;
-        background-color: #053555;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23053555' cx='50' cy='0' r='50'/%3E%3Cg fill='%2300375e' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23003967' cx='50' cy='100' r='50'/%3E%3Cg fill='%23003b70' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23003d7a' cx='50' cy='200' r='50'/%3E%3Cg fill='%23003f83' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%2300418c' cx='50' cy='300' r='50'/%3E%3Cg fill='%23004296' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%2300449f' cx='50' cy='400' r='50'/%3E%3Cg fill='%230045a8' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%230046b1' cx='50' cy='500' r='50'/%3E%3Cg fill='%230047ba' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%230047c3' cx='50' cy='600' r='50'/%3E%3Cg fill='%230047cb' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%230047d4' cx='50' cy='700' r='50'/%3E%3Cg fill='%230047dc' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%230046e3' cx='50' cy='800' r='50'/%3E%3Cg fill='%230044eb' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%230042f2' cx='50' cy='900' r='50'/%3E%3Cg fill='%23003ff9' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23133BFF' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-        background-attachment: fixed;
-        background-size: contain;
-    }
-    .welcome__container h1 {
-        font-style: italic;
-        padding: 1rem;
-    }
-    .welcome__container h1::after{
+        Courier,
+        monospace;
+}
+
+.welcome__container {
+    background-color: rgb(105, 105, 250);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #053555;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23053555' cx='50' cy='0' r='50'/%3E%3Cg fill='%2300375e' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23003967' cx='50' cy='100' r='50'/%3E%3Cg fill='%23003b70' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23003d7a' cx='50' cy='200' r='50'/%3E%3Cg fill='%23003f83' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%2300418c' cx='50' cy='300' r='50'/%3E%3Cg fill='%23004296' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%2300449f' cx='50' cy='400' r='50'/%3E%3Cg fill='%230045a8' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%230046b1' cx='50' cy='500' r='50'/%3E%3Cg fill='%230047ba' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%230047c3' cx='50' cy='600' r='50'/%3E%3Cg fill='%230047cb' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%230047d4' cx='50' cy='700' r='50'/%3E%3Cg fill='%230047dc' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%230046e3' cx='50' cy='800' r='50'/%3E%3Cg fill='%230044eb' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%230042f2' cx='50' cy='900' r='50'/%3E%3Cg fill='%23003ff9' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23133BFF' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: contain;
+}
+
+.welcome__container h1 {
+    font-style: italic;
+    padding: 1rem;
+}
+
+.welcome__container h1::after {
     content: ' 🎨';
-    }
-    .welcome__container h1::before{
-        content: '🎨 ';
-        }
-    
-    
-    .input__container{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .input__container label{
-        font-size: 1.4rem;
-        font-weight: bolder;
-    }
-    
-    
-    .input__container input{
-        margin-top: 0.5rem;
-        border: 1px solid rgb(255, 255, 255);
-        outline: none;
-        padding: 0.1rem;
-        font-size: 1rem;
-    }
-    
-    
-    .welcome__container .create__room{
+}
+
+.welcome__container h1::before {
+    content: '🎨 ';
+}
+
+
+.input__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input__container label {
+    font-size: 1.4rem;
+    font-weight: bolder;
+}
+
+
+.input__container input {
+    margin-top: 0.5rem;
+    border: 1px solid rgb(255, 255, 255);
+    outline: none;
+    padding: 0.1rem;
+    font-size: 1rem;
+}
+
+.welcome__container .create__room {
     margin: 1rem;
-    }
-    .welcome__container .btn{
-      padding: 0.4rem;
-      border-radius: 27px;
-      font-size: 1rem;
-      margin-top: 20px;
-      font-weight: bold;
-      outline: none;
-    }
-    
-    .welcome__container .btn:hover{
+}
+
+.welcome__container .btn {
+    background-color: white;
+    padding: 0.4rem;
+    border-radius: 27px;
+    font-size: 1rem;
+    margin-top: 20px;
+    font-weight: bold;
+    outline: none;
+}
+
+.welcome__container .btn:hover {
     cursor: pointer;
     transition: ease-in-out .5s;
     font-size: 1.2rem;
-    }
+}

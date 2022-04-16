@@ -12,6 +12,7 @@
 }
 
 .container button{
+    background-color: white;
     padding: 0.6rem;
     border-radius: 28px;
 }

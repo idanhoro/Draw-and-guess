@@ -6,6 +6,7 @@
 }
 
 .guess__container button{
+    background-color: white;
     margin: 0.6rem;
     border-radius: 28px;
     padding: 0.2rem;
