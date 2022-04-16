@@ -51,9 +51,17 @@ now, client_1 needs to draw the word and send it at the drawing board view (Imag
 
 Once the draw received, the option to view the draw will be enabled (Image 7).
 
-Now client_2 submit his answer, if the answer is correct the session will gain score,
+Now client_2 submit his answer (Image 8), if the answer is correct the session will gain score,
 
 and the clients switch roles.
+
+#### Image 7
+<img src="./images/gussing_view_2" width="400"/>
+
+#### Image 8
+<img src="./images/gussing_view_3" width="400"/>
+
+
 
 ### Scoring roles
 * A word three or four letters long is worth one point.
