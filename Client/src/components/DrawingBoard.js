@@ -26,7 +26,7 @@ const DrawingBoard = () => {
         const context = canvas.getContext("2d")
         context.scale(10 / 9, 10 / 9)
         context.lineCap = "round";
-        context.strokeStyle = "black";
+        context.strokeStyle = "white";
         context.lineWidth = 5
         contextRef.current = context;
     }, [])
