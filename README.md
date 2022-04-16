@@ -39,7 +39,7 @@ now, client_1 needs to draw the word and send it at the drawing board view (Imag
 <img src="./images/word_choosing_view.png" width="400"/>
 
 #### Image 4
-<img src="./images/gussing_view_1.png" width="400"/>
+<img src="./images/guessing_view_1.png" width="400"/>
 
 #### Image 5
 <img src="./images/drawing_board_view_1.png" width="400"/>
