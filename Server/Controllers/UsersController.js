@@ -57,9 +57,13 @@ module.exports.joinRoom = async (req, res) => {
 
 module.exports.checkAmountOfPlayers =async (req,res) => {
     try {
+        console.log("Server rooms:" , serverData);
+        console.log('Room ID: ' ,req.headers["room-id"]);
+        console.log('Room data:' ,serverData[req.headers["room-id"]])
+        console.log('Players in room:: ', serverData[req.headers["room-id"]].PlayersInRoom);
         return res.status(200).json(serverData[req.headers["room-id"]].PlayersInRoom)
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         return res.status(400).send("Error occurred during checking if second player joined the room.")
     }
 }
