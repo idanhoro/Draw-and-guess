@@ -56,10 +56,10 @@ Now client_2 submit his answer (Image 8), if the answer is correct the session w
 and the clients switch roles.
 
 #### Image 7
-<img src="./images/gussing_view_2" width="400"/>
+<img src="./images/guessing_view_2" width="400"/>
 
 #### Image 8
-<img src="./images/gussing_view_3" width="400"/>
+<img src="./images/guessing_view_3" width="400"/>
 
 
 
