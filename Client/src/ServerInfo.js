@@ -1,7 +1,7 @@
 const ServerInfo = {
     protocol: 'Http',
-    ip : 'localhost',
-    port: '3008'
+    ip : '3.250.19.36',
+    port: '80'
 }
 
 const server = `${ServerInfo.protocol}://${ServerInfo.ip}:${ServerInfo.port}`
