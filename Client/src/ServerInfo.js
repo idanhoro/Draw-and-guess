@@ -1,6 +1,6 @@
 const ServerInfo = {
     protocol: 'Http',
-    ip : '3.250.19.36',
+    ip : 'localhost',
     port: '3008'
 }
 
