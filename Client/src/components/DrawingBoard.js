@@ -29,6 +29,7 @@ const DrawingBoard = () => {
         context.strokeStyle = "white";
         context.lineWidth = 5
         contextRef.current = context;
+        document.body.style.overflow = "hidden";
     }, [])
     // Mouse Listener
     const startDrawing = (nativeEvent) => {
